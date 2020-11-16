@@ -1,4 +1,7 @@
-# redux-boilerplate
+# wagon-cities
+Created with CodeSandbox
+
+using react-boilerplate by Le Wagon
 
 Simple React + Redux starter with the following config:
 
