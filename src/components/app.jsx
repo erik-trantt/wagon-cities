@@ -1,5 +1,6 @@
 import React from 'react';
 import CityList from '../containers/city_list';
+import ActiveCity from '../containers/active_city';
 import cities from '../data/cities';
 
 class App extends React.Component {
@@ -20,14 +21,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <div className="cities">
-          <CityList cities={cities} selectedCity={this.state.selectedCity} selectCity={this.handleClick} />
-        </div>
-        <div className="active-city">
-          <h3>{this.state.selectedCity.name}</h3>
-          <div>{this.state.selectedCity.address}</div>
-          <div><img style={{ width: '100%' }} src={`https://kitt.lewagon.com/placeholder/cities/${this.state.selectedCity.slug}`} alt="active city" /></div>
-        </div>
+        <CityList
+          cities={cities}
+          selectedCity={this.state.selectedCity}
+          selectCity={this.handleClick}
+        />
+        <ActiveCity city={this.state.selectedCity} />
       </div>
     );
   }
