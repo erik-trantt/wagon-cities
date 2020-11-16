@@ -1,10 +1,4 @@
-import cities from '../data/cities';
-
-const selectedCityReducer = (state, action) => {
-  if (state === undefined) {
-    // Reducer initialisation
-    return cities[0];
-  }
+const SelectedCityReducer = (state = null, action) => {
   // TODO: handle some actions
   switch (action.type) {
     case 'SET_SELECTED_CITY':
@@ -13,4 +7,5 @@ const selectedCityReducer = (state, action) => {
       return state;
   }
 };
-export default selectedCityReducer;
+
+export default SelectedCityReducer;
