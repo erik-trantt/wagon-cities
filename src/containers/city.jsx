@@ -10,21 +10,28 @@ class City extends React.Component {
     this.state = {};
   }
 
+  isSelected = () => {
+    return this.props.selectedCity && this.props.selectedCity.slug === this.props.city.slug;
+  }
+
   handleClick = (ev) => {
     ev.preventDefault();
-    if (this.props.selectedCity.slug !== this.props.city.slug) {
-      // console.log("update active city");
-      this.props.selectCity(this.props.city);
-    }
+    if (this.isSelected()) return;
+
+    // console.log("update active city");
+    this.props.selectCity(this.props.city);
   }
 
   render() {
     const { city } = this.props;
-    const isSelected = this.props.selectedCity.slug === city.slug;
 
     return (
       <li>
-        <a className={isSelected ? 'active' : ''} href='#' onClick={this.handleClick}>{city.name}</a>
+        <a
+          href='#'
+          className={this.isSelected() ? 'active' : ''}
+          onClick={this.handleClick}
+        >{city.name}</a>
       </li>
     );
   }
