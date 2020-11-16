@@ -1,4 +1,8 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { selectCity } from '../actions';
 
 class City extends React.Component {
   constructor(props) {
@@ -8,12 +12,34 @@ class City extends React.Component {
 
   handleClick = (ev) => {
     ev.preventDefault();
-    this.props.selectCity(this.props.index);
+    if (this.props.selectedCity.slug !== this.props.city.slug) {
+      // console.log("update active city");
+      this.props.selectCity(this.props.city);
+    }
   }
 
   render() {
-    return <li><a className={this.props.selected ? 'active' : ''} href={`#`} onClick={this.handleClick}>{this.props.name}</a></li>;
+    const { city } = this.props;
+    const isSelected = this.props.selectedCity.slug === city.slug;
+
+    return (
+      <li>
+        <a className={isSelected ? 'active' : ''} href='#' onClick={this.handleClick}>{city.name}</a>
+      </li>
+    );
   }
 }
 
-export default City;
+function mapStateToProps(state) {
+  return {
+    selectedCity: state.selectedCity
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { selectCity }, dispatch
+  );
+}
+// export default City;
+export default connect(mapStateToProps, mapDispatchToProps)(City);

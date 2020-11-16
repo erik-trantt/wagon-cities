@@ -1,4 +1,8 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { setCities } from '../actions';
 import City from './city';
 
 class CityList extends React.Component {
@@ -7,7 +11,17 @@ class CityList extends React.Component {
     this.state = {};
   }
 
+  UNSAFE_componentWillMount() {
+    this.props.setCities();
+    // console.log("When component will mount");
+  }
+
+  // componentDidMount() {
+  //   console.log("When component did mount");
+  // }
+
   render() {
+    // console.log(this.props);
     const { cities } = this.props;
     return (
       <div className="cities">
@@ -16,10 +30,8 @@ class CityList extends React.Component {
             return (
               <City
                 key={city.address}
-                selected={this.props.selectedCity.slug === city.slug}
-                selectCity={this.props.selectCity}
                 index={index}
-                {...city}
+                city={city}
               />
             );
           })}
@@ -29,4 +41,16 @@ class CityList extends React.Component {
   }
 }
 
-export default CityList;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setCities }, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    cities: state.cities,
+    selectedCity: state.selectedCity
+  };
+}
+
+// export default CityList;
+export default connect(mapStateToProps, mapDispatchToProps)(CityList);

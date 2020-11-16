@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const ActiveCity = (props) => {
   const { city } = props;
@@ -12,4 +13,8 @@ const ActiveCity = (props) => {
   );
 };
 
-export default ActiveCity;
+function mapStateToProps(state) {
+  return { city: state.selectedCity };
+}
+// export default ActiveCity;
+export default connect(mapStateToProps)(ActiveCity);
