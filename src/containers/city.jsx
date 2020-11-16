@@ -3,6 +3,7 @@ import React from 'react';
 class City extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   handleClick = (ev) => {
@@ -11,7 +12,7 @@ class City extends React.Component {
   }
 
   render() {
-    return <li><a href={`#`} onClick={this.handleClick}>{this.props.name}</a></li>;
+    return <li><a className={this.props.selected ? 'active' : ''} href={`#`} onClick={this.handleClick}>{this.props.name}</a></li>;
   }
 }
 

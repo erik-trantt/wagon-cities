@@ -4,15 +4,18 @@ body {
   font-size: 16px;
 }
 
+* { box-sizing: border-box; }
+
 .app {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  // margin-top: 20px;
+  // margin-bottom: 20px;
   display: flex;
   .cities {
     width: 30%;
     border: 1px solid #ddd;
-    height: 90vh;
+    height: calc(100vh);
     border-radius: 4px;
+    overflow-y: scroll;
   }
   .cities > ul {
     list-style: none;
@@ -27,12 +30,16 @@ body {
   .cities li>a {
     padding: 10px 20px;
     width: 100%;
+    text-decoration: none;
+
+    &, &:visited { color: white; }
+    &.active, &:hover { background: white; color: #3d3d3d; }
   }
   .active-city {
     width: 70%;
-    height: 90vh;
+    height: calc(100vh);
     margin-left: 20px;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     padding: 10px 15px;
     border: 1px solid #ddd;
     border-radius: 4px;

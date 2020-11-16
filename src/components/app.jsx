@@ -7,27 +7,30 @@ class App extends React.Component {
     super(props);
     this.state = {
       selectedCity: cities[0],
-    }
+    };
   }
 
   handleClick = (selectedIndex) => {
-    this.setState({ selectedCity: cities[selectedIndex] });
+    if (this.state.selectedCity.slug !== cities[selectedIndex].slug) {
+      this.setState({ selectedCity: cities[selectedIndex] });
+      console.log("update city");
+    }
   }
-  
+
   render() {
     return (
       <div className="app">
         <div className="cities">
-          <CityList cities={cities} selectCity={this.handleClick} />
+          <CityList cities={cities} selectedCity={this.state.selectedCity} selectCity={this.handleClick} />
         </div>
         <div className="active-city">
-          <div>{this.state.selectedCity.name}</div>
+          <h3>{this.state.selectedCity.name}</h3>
           <div>{this.state.selectedCity.address}</div>
-          <div><img style={{ width: '100%' }} src={`https://kitt.lewagon.com/placeholder/cities/${this.state.selectedCity.slug}`} alt="active city"/></div>
+          <div><img style={{ width: '100%' }} src={`https://kitt.lewagon.com/placeholder/cities/${this.state.selectedCity.slug}`} alt="active city" /></div>
         </div>
       </div>
     );
   }
-};
+}
 
 export default App;
